@@ -1,4 +1,8 @@
 class EmergenciesController < ApplicationController
+  def index
+    render_ok(Emergency.all)
+  end
+
   def create
     emergency = Emergency.new(create_emergency_params)
 
