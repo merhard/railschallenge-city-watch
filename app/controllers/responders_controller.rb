@@ -17,7 +17,7 @@ class RespondersController < ApplicationController
     responder = Responder.new(create_responder_params)
 
     if responder.save
-      render json: responder, status: :created
+      render_created(responder)
     else
       render_unprocessable(responder.errors)
     end

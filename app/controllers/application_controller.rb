@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     render_json(object, :ok)
   end
 
+  def render_created(object)
+    render_json(object, :created)
+  end
+
   def render_unprocessable(message)
     object = message_with_root_element(message)
 
