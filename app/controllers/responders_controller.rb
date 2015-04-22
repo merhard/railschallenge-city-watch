@@ -9,7 +9,7 @@ class RespondersController < ApplicationController
     if @responder
       render_ok(@responder)
     else
-      render json: { message: 'page not found' }, status: :not_found
+      render_not_found
     end
   end
 
@@ -29,6 +29,18 @@ class RespondersController < ApplicationController
     else
       render_unprocessable(@responder.errors)
     end
+  end
+
+  def new
+    render_not_found
+  end
+
+  def edit
+    render_not_found
+  end
+
+  def destroy
+    render_not_found
   end
 
   private
