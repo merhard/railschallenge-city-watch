@@ -1,5 +1,5 @@
 class EmergenciesController < ApplicationController
-  before_action :set_emergency, only: :show
+  before_action :set_emergency, only: [:show, :update]
 
   def index
     render_ok(Emergency.all)
@@ -23,6 +23,14 @@ class EmergenciesController < ApplicationController
     end
   end
 
+  def update
+    if @emergency.update(update_emergency_params)
+      render_ok(@emergency)
+    else
+      render_unprocessable(@emergency.errors)
+    end
+  end
+
   private
 
   def set_emergency
@@ -31,5 +39,9 @@ class EmergenciesController < ApplicationController
 
   def create_emergency_params
     params.require(:emergency).permit(:code, :fire_severity, :police_severity, :medical_severity)
+  end
+
+  def update_emergency_params
+    params.require(:emergency).permit(:fire_severity, :police_severity, :medical_severity, :resolved_at)
   end
 end
