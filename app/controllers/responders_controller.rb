@@ -5,7 +5,7 @@ class RespondersController < ApplicationController
     if responder.save
       render json: responder, status: :created
     else
-      render json: { message: responder.errors }, status: :unprocessable_entity
+      render_unprocessable(responder.errors)
     end
   end
 
