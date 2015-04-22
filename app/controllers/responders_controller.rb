@@ -1,9 +1,12 @@
 class RespondersController < ApplicationController
   def create
     responder = Responder.new(responder_params)
-    responder.save
 
-    render json: responder, status: :created
+    if responder.save
+      render json: responder, status: :created
+    else
+      render json: { message: responder.errors }, status: :unprocessable_entity
+    end
   end
 
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421185157) do
+ActiveRecord::Schema.define(version: 20150421203223) do
 
   create_table "responders", force: :cascade do |t|
     t.datetime "created_at",                     null: false
@@ -22,5 +22,7 @@ ActiveRecord::Schema.define(version: 20150421185157) do
     t.integer  "capacity"
     t.boolean  "on_duty",        default: false
   end
+
+  add_index "responders", ["name"], name: "index_responders_on_name", unique: true
 
 end
