@@ -1,4 +1,8 @@
 class RespondersController < ApplicationController
+  def index
+    render json: Responder.all, status: :ok
+  end
+
   def create
     responder = Responder.new(responder_params)
 
