@@ -10,4 +10,10 @@ group :development, :test do
   gem 'minitest-rails', '~> 2.1.1'
   gem 'database_cleaner', '1.4.1'
   gem 'web-console', '~> 2.0'
+
+  gem 'pry-rails'
+end
+
+group :test do
+  gem 'minitest-reporters', '~> 1.0.11', require: false
 end
