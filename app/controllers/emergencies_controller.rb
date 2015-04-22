@@ -31,6 +31,18 @@ class EmergenciesController < ApplicationController
     end
   end
 
+  def new
+    render_not_found
+  end
+
+  def edit
+    render_not_found
+  end
+
+  def destroy
+    render_not_found
+  end
+
   private
 
   def set_emergency
