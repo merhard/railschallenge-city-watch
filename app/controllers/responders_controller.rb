@@ -1,6 +1,16 @@
 class RespondersController < ApplicationController
   def index
-    render json: Responder.all, status: :ok
+    render_ok(Responder.all)
+  end
+
+  def show
+    responder = Responder.find_by(name: params[:name])
+
+    if responder
+      render_ok(responder)
+    else
+      render json: { message: 'page not found' }, status: :not_found
+    end
   end
 
   def create
