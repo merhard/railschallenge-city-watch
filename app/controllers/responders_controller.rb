@@ -24,7 +24,7 @@ class RespondersController < ApplicationController
   end
 
   def update
-    if @responder.update(update_responder_params)
+    if @responder.try(:update, update_responder_params)
       render_ok(@responder)
     else
       render_unprocessable(@responder.errors)
