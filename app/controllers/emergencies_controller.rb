@@ -17,6 +17,7 @@ class EmergenciesController < ApplicationController
     emergency = Emergency.new(create_emergency_params)
 
     if emergency.save
+      Dispatcher.assign_responders(emergency)
       render_created(emergency)
     else
       render_unprocessable(emergency.errors)
