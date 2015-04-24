@@ -5,28 +5,28 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def render_ok(object)
-    render_json(object, :ok)
+  def render_ok(object, options = {})
+    render_json(object, :ok, options)
   end
 
-  def render_created(object)
-    render_json(object, :created)
+  def render_created(object, options = {})
+    render_json(object, :created, options)
   end
 
-  def render_unprocessable(message)
+  def render_unprocessable(message, options = {})
     object = message_with_root_element(message)
 
-    render_json(object, :unprocessable_entity)
+    render_json(object, :unprocessable_entity, options)
   end
 
-  def render_not_found
+  def render_not_found(options = {})
     object = message_with_root_element('page not found')
 
-    render_json(object, :not_found)
+    render_json(object, :not_found, options)
   end
 
-  def render_json(object, status)
-    render json: object, status: status
+  def render_json(object, status, options = {})
+    render({ json: object, status: status }.merge(options))
   end
 
   def message_with_root_element(message)

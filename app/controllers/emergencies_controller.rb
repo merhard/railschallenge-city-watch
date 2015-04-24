@@ -2,7 +2,7 @@ class EmergenciesController < ApplicationController
   before_action :set_emergency, only: [:show, :update]
 
   def index
-    render_ok(Emergency.all)
+    render_ok(Emergency.all, meta_key: :full_responses, full_responses: Emergency.full_responses)
   end
 
   def show
