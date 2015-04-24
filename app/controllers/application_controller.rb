@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_not_found(options = {})
-    object = message_with_root_element('page not found')
+    object = message_with_root_element(t(:page_not_found))
 
     render_json(object, :not_found, options)
   end
