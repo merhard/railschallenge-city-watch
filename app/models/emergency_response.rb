@@ -36,7 +36,7 @@ class EmergencyResponse
   end
 
   def closest_responder_with_enough_capacity(severity)
-    potential_responders.find_by('capacity >= ?', severity)
+    responder_pool.detect { |responder| responder.capacity >= severity }
   end
 
   def responder_pool
