@@ -12,4 +12,8 @@ class Dispatcher
 
     emergency.save
   end
+
+  def self.update_response(emergency)
+    emergency.responders.clear if emergency.resolved?
+  end
 end

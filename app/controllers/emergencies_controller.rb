@@ -26,6 +26,7 @@ class EmergenciesController < ApplicationController
 
   def update
     if @emergency.try(:update, update_emergency_params)
+      Dispatcher.update_response(@emergency)
       render_ok(@emergency)
     else
       render_unprocessable(@emergency.errors)

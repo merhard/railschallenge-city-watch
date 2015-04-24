@@ -12,4 +12,8 @@ class Emergency < ActiveRecord::Base
       all.size
     ]
   end
+
+  def resolved?
+    resolved_at
+  end
 end
