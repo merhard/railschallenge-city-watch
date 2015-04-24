@@ -9,5 +9,7 @@ class Dispatcher
       emergency.full_response = false unless emergency_response.full?
       emergency.responders << emergency_response.responders
     end
+
+    emergency.save
   end
 end
