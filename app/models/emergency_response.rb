@@ -14,7 +14,7 @@ class EmergencyResponse
     return [] if severity == 0
     return potential_responders if severity >= capacity_total
 
-    []
+    potential_responders.where('capacity >= ?', severity).first
   end
 
   private
@@ -24,6 +24,6 @@ class EmergencyResponse
   end
 
   def potential_responders
-    @potential_responders ||= Responder.ready.type(responder_type)
+    @potential_responders ||= Responder.ready.type(responder_type).order(capacity: :asc)
   end
 end
