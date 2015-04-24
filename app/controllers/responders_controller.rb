@@ -2,7 +2,11 @@ class RespondersController < ApplicationController
   before_action :set_responder, only: [:show, :update]
 
   def index
-    render_ok(Responder.all)
+    if params[:show] == 'capacity'
+      render_ok(Capacity.new)
+    else
+      render_ok(Responder.all)
+    end
   end
 
   def show
