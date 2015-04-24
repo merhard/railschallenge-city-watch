@@ -11,6 +11,9 @@ class EmergencyResponse
   end
 
   def responders
+    return [] if severity == 0
+    return potential_responders if severity >= capacity_total
+
     []
   end
 
