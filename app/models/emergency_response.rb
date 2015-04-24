@@ -14,7 +14,15 @@ class EmergencyResponse
     return [] if severity == 0
     return potential_responders if severity >= capacity_total
 
-    potential_responders.where('capacity >= ?', severity).first
+    responders = []
+    capacity = 0
+    while severity > capacity
+      needed_capacity = severity - capacity
+      responder = closest_responder_with_enough_capacity(needed_capacity) || responder_pool.pop
+      responders << responder
+      capacity += responder.capacity
+    end
+    responders
   end
 
   private
@@ -25,5 +33,13 @@ class EmergencyResponse
 
   def potential_responders
     @potential_responders ||= Responder.ready.type(responder_type).order(capacity: :asc)
+  end
+
+  def closest_responder_with_enough_capacity(severity)
+    potential_responders.where('capacity >= ?', severity).first
+  end
+
+  def responder_pool
+    @responder_pool ||= potential_responders.to_a
   end
 end
