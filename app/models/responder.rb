@@ -13,10 +13,7 @@ class Responder < ActiveRecord::Base
   scope :on_duty, -> { where(on_duty: true) }
   scope :available, -> { where(emergency_id: nil) }
   scope :ready, -> { available.on_duty }
-
-  def self.capacity_total
-    sum(:capacity)
-  end
+  scope :capacity_total, -> { sum(:capacity) }
 
   def self.capacity_total_of_type(type)
     type(type).capacity_total
