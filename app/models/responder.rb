@@ -15,6 +15,8 @@ class Responder < ActiveRecord::Base
   scope :ready, -> { available.on_duty }
   scope :capacity_total, -> { sum(:capacity) }
 
+  delegate :code, to: :emergency, prefix: true, allow_nil: true
+
   def self.capacity_total_of_type(type)
     type(type).capacity_total
   end
