@@ -6,10 +6,6 @@ class EmergencyResponse
     @responder_type = responder_type
   end
 
-  def full?
-    capacity_total >= severity
-  end
-
   def responders
     return [] if severity == 0
     return potential_responders if severity >= capacity_total
@@ -17,11 +13,11 @@ class EmergencyResponse
     most_efficient_response
   end
 
-  private
-
   def capacity_total
     @capacity_total ||= potential_responders.capacity_total
   end
+
+  private
 
   def potential_responders
     @potential_responders ||= Responder.ready.type(responder_type).order(capacity: :asc)
