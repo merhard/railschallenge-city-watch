@@ -7,17 +7,13 @@ class Capacity
     @responders = responders
   end
 
-  delegate :capacity_total_of_type, :available_capacity_total_of_type,
-           :on_duty_capacity_total_of_type, :ready_capacity_total_of_type,
-           to: :responders
-
   Responder::TYPES.each do |type|
     define_method(type) do
       [
-        capacity_total_of_type(type),
-        available_capacity_total_of_type(type),
-        on_duty_capacity_total_of_type(type),
-        ready_capacity_total_of_type(type)
+        responders.type(type).capacity_total,
+        responders.available.type(type).capacity_total,
+        responders.on_duty.type(type).capacity_total,
+        responders.ready.type(type).capacity_total
       ]
     end
   end
